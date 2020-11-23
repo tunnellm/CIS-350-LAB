@@ -1,25 +1,17 @@
+# Travis CI Java documentation can be found in:
+# https://docs.travis-ci.com/user/languages/java/
+
+# We will use Ubuntu 18.04 (bionic beaver). List of options:
+# https://docs.travis-ci.com/user/reference/overview/#linux
+dist: xenial
+
+# This enables the 'defaults' to test java applications:
 language: java
-jdk: oraclejdk11
-sudo: required
-env:
-  global:
-    - GH_PROJECT_NAME: IntelliJ-Key-Promoter
-    - GIT_AUTHOR_NAME: TravisCI
-    - GIT_AUTHOR_EMAIL: noreply@travis-ci.org
-    - CI_HOME=`pwd`
-    - GRADLE_USER_HOME=`pwd`/.gradle
 
-before_script:
-  - chmod +x gradlew
+# We can specify a list of JDKs to be used for testing
+# A list of available JDKs in Trusty can be seed in:
+# https://docs.travis-ci.com/user/reference/xenial/#jvm-clojure-groovy-java-scala-support
+jdk:
+  - openjdk11
 
-deploy:
-  provider: releases
-  skip_cleanup: true
-  api_key:
-    secure: "UhFFX42ebrLsRb2dZN+h6Us21w8qDvXuWRJhFeuVpeR8TA9HLKVVSJRXRCvVDKkL8na6S7hvIgMycaiN1kslRasG1dM5jgFoybBgbB5lxHMPIrl7+iZ6kVpCjMk1LUV+lRR63iSbwoD2jA7rThoxi4/ilSaW5QgwhT3WWeJdb1jUYnv1zUMSx3SDjNi6Nuv5MsK8S6w9fsbxVi555+Pv8yEsGkOS314KPOUi3aUVQhEKkpuN9dRePZ4uok1pf0mlljx4/CqAK/IuXEYpLhoM3M4S67nSPw5qMH1fYbz60i1klPo7AQLJXbIFXYqhetu/3/UYR1oo4XbXh3eKrOnN2cbQhccc+na/M6SFZ1EC4FAT2uoWVHI/tPtN5pL8PsjeGXXHQB7qQrlZooIkHwV4wRj9i41XYt4WohXK6f203kdHlEoF3jhGc2zJO/vo9i8nOLbwjC6zDKeRiIfBWu42+iPOv5LjLr03PiRdFaArnH26r3slV8OZ0jr/3WuwkUTMrvL34dRaT+OVRZYQluf8TJC9nP0pnOBGR+R/TleTqmeixMjZVPUul+UpVqaHcXdy3zWgIM206mEdfTvHpUHMY3jNqp/PcjgQ6YlCPoLpBedFKDGxGhtQUEojqlPIeH2zWkV/COvLLtX01PIfjadkCSPJDZa26E6r17S28dFbqS4="
-  file_glob: true
-  file: $CI_HOME/build/distributions/Key-Promoter-X*.zip
-  on:
-    repo: halirutan/IntelliJ-Key-Promoter
-    tags: true
-    all_branches: true
+script: ant build
