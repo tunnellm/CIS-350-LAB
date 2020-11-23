@@ -21,16 +21,14 @@
         <path refid="CIS-350-LAB.classpath"/>
         <path refid="JUnit 4.libraryclasspath"/>
     </path>
+    <path id="run.SimpleCalculator.classpath">
+        <path refid="CIS-350-LAB.classpath"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+    </path>
     <target name="init">
         <mkdir dir="bin"/>
         <copy includeemptydirs="false" todir="bin">
             <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="tests">
                 <exclude name="**/*.launch"/>
                 <exclude name="**/*.java"/>
             </fileset>
@@ -46,7 +44,6 @@
         <echo message="${ant.project.name}: ${ant.file}"/>
         <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
-            <src path="tests"/>
             <classpath refid="CIS-350-LAB.classpath"/>
         </javac>
     </target>
@@ -72,6 +69,11 @@
             <jvmarg line="-ea"/>
             <classpath refid="run.SimpleCalculatorTest.classpath"/>
         </junit>
+    </target>
+    <target name="SimpleCalculator">
+        <java classname="SimpleCalculator" failonerror="true" fork="yes">
+            <classpath refid="run.SimpleCalculator.classpath"/>
+        </java>
     </target>
     <target name="junitreport">
         <junitreport todir="${junit.output.dir}">
