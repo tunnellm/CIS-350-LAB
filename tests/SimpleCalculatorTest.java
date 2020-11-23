@@ -1,10 +1,14 @@
+package tests;
 
 import java.util.*;
 
 import static org.junit.Assert.*;
 import org.junit.*;
 
+import src.SimpleCalculator;
+
 public class SimpleCalculatorTest {
+	
 	@Test
 	public void testAdd() {
 		SimpleCalculator calc = new SimpleCalculator();
@@ -29,5 +33,18 @@ public class SimpleCalculatorTest {
 		SimpleCalculator calc = new SimpleCalculator();
 		assertEquals(calc.div(8, 2), 4);
 	}
+	
+	@Test
+	public void testMod() {
+		SimpleCalculator calc = new SimpleCalculator();
+		assertEquals(calc.mod(10, 1), 0);
+	}
+	
+	@Test
+	public void testRoundUp() {
+		SimpleCalculator calc = new SimpleCalculator();
+		assertEquals(calc.roundUp(10.3), 11);
+	}
+	
 }
 
